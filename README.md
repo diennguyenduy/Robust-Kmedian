@@ -18,9 +18,9 @@ Run this command :
 `
 
 Output :
-![Bash Output](image/cmd.png)
+![Bash Output](image/cmd.PNG)
 * The output will be 2 files in the output directory (eg: results) which contains the center point of each cluster, and cluster for each point.
 
-![Clusters File Syntax](image/centroid.png)
+![Clusters File Syntax](image/centroid.PNG)
 
 -------------------------------
