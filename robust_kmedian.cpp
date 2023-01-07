@@ -113,7 +113,7 @@ public:
     void setCentroidByPos(int pos, double val) { this->centroid[pos] = val; }
 };
 
-class KMeans
+class KMedian
 {
 private:
     int K, iters, dimensions, total_points;
@@ -172,7 +172,7 @@ private:
     }
 
 public:
-    KMeans(int K, int iterations, string output_dir)
+    KMedian(int K, int iterations, string output_dir)
     {
         this->K = K;
         this->iters = iterations;
@@ -308,7 +308,7 @@ int main(int argc, char **argv)
     // Need 4 arguments (except filename) to run, else exit
     if (argc != 5)
     {
-        cout << "Error: command-line argument count mismatch. \n ./kmeans <INPUT> <DELTA> <K> <OUT-DIR>" << endl;
+        cout << "Error: command-line argument count mismatch. \n ./robust_kmedian <INPUT> <DELTA> <K> <OUT-DIR>" << endl;
         return 1;
     }
 
@@ -370,8 +370,8 @@ int main(int argc, char **argv)
     // Running K-Means Clustering
     int iters = 100;
 
-    KMeans kmeans(K, iters, output_dir);
-    kmeans.run(all_points, delta);
+    KMedian KMedian(K, iters, output_dir);
+    KMedian.run(all_points, delta);
 
     return 0;
 }

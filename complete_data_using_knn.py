@@ -20,7 +20,6 @@ def CompleteData(k, theta, input, output1, output2):
         max_val = neighbor[dim]
         min_val = neighbor[dim]
         break
-      break
 
     for neighbor in neighbors:
       if neighbor[dim] > max_val:
@@ -30,6 +29,7 @@ def CompleteData(k, theta, input, output1, output2):
 
     value = "{:.1f}".format((max_val*(1+theta) + min_val*(1-theta))/2)
     delta = "{:.1f}".format((max_val*(1+theta) - min_val*(1-theta))/2)
+
     return value, delta
 
   
@@ -49,11 +49,11 @@ def CompleteData(k, theta, input, output1, output2):
       counter2 = 1
 
     return sqrt(distance)/counter2
-  
-  # Locate the most similar neighbors
-  def get_neighbors(train, test_row, num_neighbors):
+
+  # Get the most similar (nearest) neighbors
+  def get_neighbors(data, test_row, num_neighbors):
     distances = list()
-    for train_row in train:
+    for train_row in data:
       dist = euclidean_distance(test_row, train_row)
       distances.append((train_row, dist))
       distances.sort(key=lambda tup: tup[1])
@@ -64,7 +64,7 @@ def CompleteData(k, theta, input, output1, output2):
 
   with open(output1, 'w') as file:
     writer = csv.writer(file)
-    header = np.array(['x','y','z','t'])
+    header = np.array(['sepal.length','sepal.width','petal.length','petal.width'])
     writer.writerow(header)
     for datum in data:
       newDatum = np.zeros(dimensions)
@@ -79,7 +79,7 @@ def CompleteData(k, theta, input, output1, output2):
 
   with open(output2, 'w') as file:
     writer = csv.writer(file)
-    header = np.array(['x','y','z','t'])
+    header = np.array(['sepal.length','sepal.width','petal.length','petal.width'])
     writer.writerow(header)
     for datum in data:
       newDatum = np.zeros(dimensions)
