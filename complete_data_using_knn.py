@@ -2,11 +2,13 @@ import numpy as np
 from math import sqrt
 import pandas as pd
 import csv
+from scipy.spatial.distance import cdist, squareform
 
 def CompleteData(k, theta, input, output1, output2):
   data = pd.read_csv(input).values
 
   dimensions = len(data[0])
+  #print(dimensions)
 
   def find_value_and_delta(dim, neighbors, theta):
     max_val = 0
@@ -26,8 +28,8 @@ def CompleteData(k, theta, input, output1, output2):
       if neighbor[dim] < min_val:
         min_val = neighbor[dim]
 
-    value = "{:.3f}".format((max_val*(1+theta) + min_val*(1-theta))/2)
-    delta = "{:.3f}".format((max_val*(1+theta) - min_val*(1-theta))/2)
+    value = "{:.1f}".format((max_val*(1+theta) + min_val*(1-theta))/2)
+    delta = "{:.1f}".format((max_val*(1+theta) - min_val*(1-theta))/2)
     return value, delta
 
   
@@ -43,9 +45,11 @@ def CompleteData(k, theta, input, output1, output2):
       else:
         counter2 += 1
         distance += (num_1-num_2)**2
+    if counter2 == 0:
+      counter2 = 1
 
     return sqrt(distance)/counter2
-
+  
   # Locate the most similar neighbors
   def get_neighbors(train, test_row, num_neighbors):
     distances = list()
@@ -60,7 +64,7 @@ def CompleteData(k, theta, input, output1, output2):
 
   with open(output1, 'w') as file:
     writer = csv.writer(file)
-    header = np.array(['x','y','z'])
+    header = np.array(['x','y','z','t'])
     writer.writerow(header)
     for datum in data:
       newDatum = np.zeros(dimensions)
@@ -75,7 +79,7 @@ def CompleteData(k, theta, input, output1, output2):
 
   with open(output2, 'w') as file:
     writer = csv.writer(file)
-    header = np.array(['x','y','z'])
+    header = np.array(['x','y','z','t'])
     writer.writerow(header)
     for datum in data:
       newDatum = np.zeros(dimensions)
@@ -89,7 +93,7 @@ def CompleteData(k, theta, input, output1, output2):
       writer.writerow(newDatum)
 
 k = 6
-percent_arr = [0, 0.05, 0.1, 0.2]
+percent_arr = [0, 0.1, 0.2, 0.4]
 theta_arr = np.array([0, 0.05, 0.10, 0.15])
 
 for percent in percent_arr:
