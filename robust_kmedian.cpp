@@ -367,7 +367,7 @@ int main(int argc, char **argv)
 
     infile2.close();
 
-    // Running K-Means Clustering
+    // Running robust K-median clustering
     int iters = 100;
 
     KMedian KMedian(K, iters, output_dir);
