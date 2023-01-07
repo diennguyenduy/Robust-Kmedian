@@ -24,3 +24,5 @@ Output :
 ![Clusters File Syntax](image/centroid.PNG)
 
 -------------------------------
+
+Thank the help of [kmeans-clustering-cpp](<https://github.com/aditya1601/kmeans-clustering-cpp> "Optional title") for my implementation of the robust k-median algorithm much faster and easier.
