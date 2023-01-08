@@ -280,7 +280,7 @@ public:
 
         // Write clusters's centroid to file
         ofstream outfile;
-        outfile.open(output_dir + "/" + to_string(K) + "-clusters-Kmedians.txt");
+        outfile.open(output_dir + "/" + to_string(K) + "-centroids-robust-Kmedian.txt");
         if (outfile.is_open())
         {
             for (int i = 0; i < K; i++)
