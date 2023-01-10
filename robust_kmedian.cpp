@@ -39,13 +39,13 @@ class Point
 private:
     int pointId, clusterId;
     int dimensions; // number of dimensions (features)
-    vector<double> values; //vector of values/features of 1 data point
+    vector<double> values; //vector of features's value of 1 point
 
 public:
-    Point(int id, string line1)
+    Point(int id, string line)
     {
         pointId = id;
-        values = lineToVec(line1);
+        values = lineToVec(line);
         dimensions = values.size();
         clusterId = 0; // Initially not assigned to any cluster
     }
@@ -207,7 +207,7 @@ public:
         cout << "Clusters initialized = " << clusters.size() << endl
              << endl;
 
-        cout << "Running K-Medians Clustering.." << endl;
+        cout << "Running robust K-Medians Clustering.." << endl;
 
         int iter = 1;
         while (true)
@@ -232,14 +232,14 @@ public:
             // clear all existing clusters
             clearClusters();
 
-            // reassign points to their new clusters
+            // re-assign points to their new clusters
             for (int i = 0; i < total_points; i++)
             {
-                // cluster index is ID-1
+                // cluster index is ID - 1
                 clusters[all_points[i].getCluster() - 1].addPoint(all_points[i]);
             }
 
-            // Recalculating the center of each cluster
+            // Re-calculating the center of each cluster
             for (int i = 0; i < K; i++)
             {
                 int ClusterSize = clusters[i].getSize();
